@@ -1,15 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OAuth Permissions</title>
+    <title>Permissões do Aplicativo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #555;
+        }
+    </style>
 </head>
 <body>
-    <h1>OAuth Permissions for My App</h1>
-    <p>Click the button below to authorize access to your Google Drive.</p>
-    <a href="https://accounts.google.com/o/oauth2/auth?client_id=SEU_CLIENT_ID&redirect_uri=SEU_REDIRECT_URI&response_type=code&scope=https://www.googleapis.com/auth/drive">
-        <button>Authorize</button>
-    </a>
+    <h1>Permissões do Aplicativo</h1>
+    <p>Nosso aplicativo requer as seguintes permissões para funcionar corretamente:</p>
+    <ul>
+        <li><strong>Acesso à Diretório:</strong> Para armazenar planilhas.</li>
+        <li><strong>Acesso ao internet:</strong> realizar upload de planilhas para drive.</li>
+        <li><strong>Acesso ao armazenamento:</strong> Para salvar e carregar arquivos.</li>
+        <li><strong>Acesso à localização:</strong> Para fornecer serviços baseados em localização.</li>
+        <li><strong>Acesso à Data e hora:</strong> Para fornecer horario atual.</li>
+    </ul>
+    <p>Essas permissões são necessárias para garantir que você tenha a melhor experiência possível com nosso aplicativo. Agradecemos sua compreensão e confiança.</p>
 </body>
 </html>
