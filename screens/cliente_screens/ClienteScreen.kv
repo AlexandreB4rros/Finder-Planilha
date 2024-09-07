@@ -1,0 +1,2194 @@
+# Amarelo Desktop: 1, 0.72, 0, 10
+# Vermelho Desktop: 0.90, 0.05, 0.06, 1
+# Azul
+
+
+<ListaBipagem@MDGridLayout>
+    cols: 2
+
+<ClienteScreen>
+    name: 'ClienteScreen'
+
+    BoxLayout:
+        orientation: "vertical"
+        MDTopAppBar:
+            title: "Finder Planilha"
+            elevation: 10
+            anchor_title: 'left'
+            #md_bg_color: 0.90, 0.05, 0.06, 1
+            right_action_items: [["information-variant-circle-outline", lambda x: root.aplicar_config(), "aplicar configuração"]]
+
+        MDBottomNavigation:
+            #panel_color: 0.90, 0.05, 0.06, 1
+
+            MDBottomNavigationItem:
+                name: 'arquivos'
+                icon: 'file-document-outline'
+                text: 'Planilhas'
+
+            MDBottomNavigationItem:
+                name: 'documentar'
+                icon: 'file-document-plus-outline'
+                text: 'Nova Planilha'
+
+                MDCard:
+                    elevation: 1
+                    size_hint: 0.889, .25
+                    pos_hint: {"center_x": 0.5, "center_y": 0.80}
+                    Image:
+                        source: 'img/icon.png'
+
+                MDTextField:
+                    id: Nome_Cidade
+
+                    hint_text: 'CIDADE:'
+                    mode: "rectangle"
+                    size_hint_x: 0.889
+                    pos_hint: {"center_x": 0.5, "center_y": 0.55}
+
+                MDTextField:
+                    id: Nome_Pop
+
+                    hint_text: 'POP:'
+                    mode: "rectangle"
+                    size_hint_x: 0.40
+                    pos_hint: {"center_x": 0.25, "center_y": 0.45}
+
+                MDTextField:
+                    id: Nome_Olt
+
+                    hint_text: 'OLT:'
+                    text: "1"
+                    mode: "rectangle"
+                    size_hint_x: 0.40
+                    pos_hint: {"center_x": 0.75, "center_y": 0.45}
+
+                MDTextField:
+                    id: Nome_Slot
+
+                    hint_text: 'SLOT:'
+                    mode: "rectangle"
+                    size_hint_x: 0.40
+                    pos_hint: {"center_x": 0.25, "center_y": 0.35}
+
+                MDTextField:
+                    id: Nome_Pon
+
+                    hint_text: 'PON:'
+                    mode: "rectangle"
+                    size_hint_x: 0.40
+                    pos_hint: {"center_x": 0.75, "center_y": 0.35}
+
+                MDRaisedButton:
+                    text: "Limpar as informação"
+                    elevation: 3
+                    #md_bg_color: 0.90, 0.05, 0.06, 1
+                    size_hint_x: 0.40
+                    pos_hint: {"center_x": 0.25, "center_y": 0.175}
+                    on_release:
+                        root.Limpar_Widget()
+
+                MDRaisedButton:
+                    text: "Informação Fake"
+                    elevation: 3
+                    #md_bg_color: 0.90, 0.05, 0.06, 1
+                    size_hint_x: 0.40
+                    pos_hint: {"center_x": 0.75, "center_y": 0.175}
+                    on_release:
+                        root.Info_Fake()
+
+                MDRaisedButton:
+                    text: "Próximo"
+                    #md_bg_color: 0.90, 0.05, 0.06, 1
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.110}
+                    size_hint_x: 0.889
+                    elevation: 3
+                    on_release:
+                        root.proxima_tela_cto()
+
+            MDBottomNavigationItem:
+                name: 'user'
+                icon: 'account-circle-outline'
+                text: 'Usuário'
+
+                MDGridLayout:
+                    cols: 2
+                    size_hint_x: 0.70
+                    pos_hint: {"center_x": 0.5, "center_y": 0.40}
+                    ListaBipagem:
+                        MDCheckbox:
+                            id: selecionar_tema_escuro
+                            group: 'selecionar_tema'
+                        MDLabel:
+                            text: "Dark"
+                    ListaBipagem:
+                        MDCheckbox:
+                            id: selecionar_tema_claro
+                            group: 'selecionar_tema'
+                        MDLabel:
+                            text: "Ligth"
+
+                Image:
+                    size_hint: .3, .3
+                    pos_hint: {"center_x": 0.5, "center_y": 0.80}
+                    source: 'img/user.png'
+
+                MDLabel:
+                    text: "Alexandre B."
+                    font_style: "H5"
+                    role: "small"
+                    #size_hint_x: 0.5
+                    pos_hint: {"center_x": .8, "center_y": .65}
+
+                MDTextField:
+                    id: Nome_User
+
+                    hint_text: 'User:'
+                    #mode: "rectangle"
+                    size_hint_x: 0.75
+                    pos_hint: {"center_x": 0.5, "center_y": 0.50}
+
+                MDRaisedButton:
+                    text: "Salvar"
+                    #md_bg_color: 0.90, 0.05, 0.06, 1
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.110}
+                    size_hint_x: 0.75
+                    elevation: 3
+                    on_release:
+                        root.aplicar_config()
+
+#********************************** TELA 02 - INDENTIFICAÇÃO DA CTO **********************************
+
+<Selecionar_spliter>
+    name: 'Selecionar_spliter'
+
+    cto_field: cto
+    obs_field: obs
+
+    BoxLayout:
+        orientation: "vertical"
+        MDTopAppBar:
+            #md_bg_color: 0.90, 0.05, 0.06, 1
+            title: "Finder Planilha"
+            elevation: 2
+            anchor_title: 'left'
+            #pos_hint: {"center_x": 0.5, "center_y": 0.95}
+            left_action_items: [["chevron-left", lambda x: root.tela_anterior(), "Tela Principal"]]
+            right_action_items: [["information-variant-circle-outline", lambda x: root.aplicar_config(), "aplicar configuração"]]
+
+        MDFloatLayout:
+            MDGridLayout:
+                cols: 2
+                pos_hint: {"center_x": 0.5, "center_y": 0.50}
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: umpraoito
+                        group: 'indentidade_cto'
+                    MDLabel:
+                        text: "8 - Portas"
+                ListaBipagem:
+                    MDCheckbox:
+                        id: umpradezeseis
+                        group: 'indentidade_cto'
+                    MDLabel:
+                        text: "16 - Portas"
+
+            MDCard:
+                elevation: 1
+                size_hint: 0.889, .25
+                pos_hint: {"center_x": 0.5, "center_y": 0.80}
+                Image:
+                    source: 'img/icon.png'
+
+            MDTextField:
+                id: cto
+
+                hint_text: 'Identifique a cto:'
+                mode: "rectangle"
+                size_hint_x: 0.889
+                pos_hint: {"center_x": 0.5, "center_y": 0.60}
+
+            MDTextField:
+                id: obs
+
+                hint_text: 'Observação:'
+                mode: "rectangle"
+                multiline: True
+                size_hint: 0.889, .20
+                pos_hint: {"center_x": 0.5, "center_y": 0.35}
+
+            MDRaisedButton:
+                text: "Limpar as informação"
+                elevation: 3
+                #md_bg_color: 0.90, 0.05, 0.06, 1
+                size_hint_x: 0.40
+                pos_hint: {"center_x": 0.25, "center_y": 0.175}
+                on_release:
+                    root.Limpar_Widget()
+
+            MDRaisedButton:
+                text: "Informação Fake"
+                elevation: 3
+                #md_bg_color: 0.90, 0.05, 0.06, 1
+                size_hint_x: 0.40
+                pos_hint: {"center_x": 0.75, "center_y": 0.175}
+                on_release:
+                    root.Info_Fake()
+
+            MDRaisedButton:
+                text: "Próximo"
+                #md_bg_color: 0.90, 0.05, 0.06, 1
+                pos_hint: {'center_x': 0.5, 'center_y': 0.110}
+                size_hint_x: 0.889
+                elevation: 3
+                on_release:
+                    root.proxima_tela()
+
+
+
+#********************************** TELA 03 - PORTAS DA CTO **********************************
+
+<tela1x8>
+    name: 'tela1x8'
+
+    MDBoxLayout:
+        orientation: "vertical"
+        MDTopAppBar:
+            #md_bg_color: 0.90,0.05,0.06,1
+            title: "Finder Planilha"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            left_action_items: [["arrow-left-bold", lambda x: root.tela_anterior()]]
+            right_action_items: [["broom", lambda x: root.fachina()], ["file-send-outline", lambda x: root.salvar_cto()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            MDScrollView:
+                MDList:
+                    id: lista
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 1"
+                        secondary_text: root.time_text01
+                        on_release:
+                            root.manager.current = "PA01"
+                            #root.update_secondary_text()
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP01()
+                                #root.update_secondary_text()  # Atualize o valor de StsP01
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 2"
+                        secondary_text: root.time_text02
+                        on_release:
+                            root.manager.current = "PA02"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP02()
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 3"
+                        secondary_text: root.time_text03
+                        on_release:
+                            root.manager.current = "PA03"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP03()
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 4"
+                        secondary_text: root.time_text04
+                        on_release:
+                            root.manager.current = "PA04"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP04()
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 5"
+                        secondary_text: root.time_text05
+                        on_release:
+                            root.manager.current = "PA05"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP05()
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 6"
+                        secondary_text: root.time_text06
+                        on_release:
+                            root.manager.current = "PA06"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP06()
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 7"
+                        secondary_text: root.time_text07
+                        on_release:
+                            root.manager.current = "PA07"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP07()
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 8"
+                        secondary_text: root.time_text08
+                        on_release:
+                            root.manager.current = "PA08"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP08()
+
+<tela1x16>
+    name: 'tela1x16'
+
+    MDBoxLayout:
+        orientation: "vertical"
+        MDTopAppBar:
+            #md_bg_color: 0.90,0.05,0.06,1
+            title: "Finder Planilha"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            left_action_items: [["arrow-left-bold", lambda x: root.tela_anterior()]]
+            right_action_items: [["broom", lambda x: root.fachina()], ["file-send-outline", lambda x: root.salvar_cto()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            MDScrollView:
+                MDList:
+                    id: lista
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 1"
+                        secondary_text: root.time_text01
+                        on_release:
+                            root.manager.current = "PB01"
+                            #root.update_secondary_text()
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP01()
+                                #root.update_secondary_text()  # Atualize o valor de StsP01
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 2"
+                        secondary_text: root.time_text02
+                        on_release:
+                            root.manager.current = "PB02"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP02()
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 3"
+                        secondary_text: root.time_text03
+                        on_release:
+                            root.manager.current = "PB03"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP03()
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 4"
+                        secondary_text: root.time_text04
+                        on_release:
+                            root.manager.current = "PB04"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP04()
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 5"
+                        secondary_text: root.time_text05
+                        on_release:
+                            root.manager.current = "PB05"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP05()
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 6"
+                        secondary_text: root.time_text06
+                        on_release:
+                            root.manager.current = "PB06"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP06()
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 7"
+                        secondary_text: root.time_text07
+                        on_release:
+                            root.manager.current = "PB07"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP07()
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 8"
+                        secondary_text: root.time_text08
+                        on_release:
+                            root.manager.current = "PB08"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP08()
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 9"
+                        secondary_text: root.time_text09
+                        on_release:
+                            root.manager.current = "PB09"
+
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP09()
+                                #root.update_secondary_text()  # Atualize o valor de StsP01
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 10"
+                        secondary_text: root.time_text10
+                        on_release:
+                            root.manager.current = "PB10"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP10()
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 11"
+                        secondary_text: root.time_text11
+                        on_release:
+                            root.manager.current = "PB11"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP11()
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 12"
+                        secondary_text: root.time_text12
+                        on_release:
+                            root.manager.current = "PB12"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP12()
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 13"
+                        secondary_text: root.time_text13
+                        on_release:
+                            root.manager.current = "PB13"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP13()
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 14"
+                        secondary_text: root.time_text14
+                        on_release:
+                            root.manager.current = "PB14"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP14()
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 15"
+                        secondary_text: root.time_text15
+                        on_release:
+                            root.manager.current = "PB15"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP15()
+
+                    TwoLineRightIconListItem:
+                        text: "Porta - 16"
+                        secondary_text: root.time_text16
+                        on_release:
+                            root.manager.current = "PB16"
+                        IconRightWidget:
+                            icon: "clock"
+                            on_release:
+                                root.save_timeP16()
+
+
+##********************************** TELA 04 -  **********************************
+
+<PA01>
+    name: "PA01"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 01"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PA01()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP01
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP01
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd01
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid01
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs01
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+<PA02>
+    name: "PA02"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 02"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PA02()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP02
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP02
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd02
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid02
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs02
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PA03>
+    name: "PA03"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 03"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PA03()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP03
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP03
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd03
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid03
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs03
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PA04>
+    name: "PA04"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 04"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PA04()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP04
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP04
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd04
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid04
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs04
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PA05>
+    name: "PA05"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 05"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PA05()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP05
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP05
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd05
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid05
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs05
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PA06>
+    name: "PA06"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 06"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PA06()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP06
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP06
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd06
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid06
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs06
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PA07>
+    name: "PA07"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 07"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PA07()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP07
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP07
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd07
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid07
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs07
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PA08>
+    name: "PA08"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 08"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PA08()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP08
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP08
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd08
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid08
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs08
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PB01>
+    name: "PB01"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 01"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PB01()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP01
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP01
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd01
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid01
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs01
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+<PB02>
+    name: "PB02"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 02"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PB02()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP02
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP02
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd02
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid02
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs02
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PB03>
+    name: "PB03"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 03"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PB03()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP03
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP03
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd03
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid03
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs03
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PB04>
+    name: "PB04"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 04"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PB04()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP04
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP04
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd04
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid04
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs04
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PB05>
+    name: "PB05"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 05"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PB05()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP05
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP05
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd05
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid05
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs05
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PB06>
+    name: "PB06"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 06"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PB06()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP06
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP06
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd06
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid06
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs06
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PB07>
+    name: "PB07"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 07"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PB07()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP07
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP07
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd07
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid07
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs07
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PB08>
+    name: "PB08"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 08"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PB08()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP08
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP08
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd08
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid08
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs08
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+
+<PB09>
+    name: "PB09"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 09"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PB09()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP09
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP09
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd09
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid09
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs09
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PB10>
+    name: "PB10"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 10"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PB10()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP10
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP10
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd10
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid10
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs10
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PB11>
+    name: "PB11"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 11"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PB11()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP11
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP11
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd11
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid11
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs11
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PB12>
+    name: "PB12"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 12"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PB12()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP12
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP12
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd12
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid12
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs12
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PB13>
+    name: "PB13"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 13"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PB13()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP13
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP13
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd13
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid13
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs13
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PB14>
+    name: "PB14"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 14"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PB14()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP14
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP14
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd14
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid14
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs14
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PB15>
+    name: "PB15"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 15"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PB15()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP15
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP15
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd15
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid15
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs15
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "
+
+<PB16>
+    name: "PB16"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0.10
+
+        MDTopAppBar:
+            title: "Porta 16"
+            elevation: 2.5
+            anchor_title: 'left'
+            pos_hint_x: {'top': 1}
+            right_action_items: [["content-save-edit", lambda x: root.Salvar_Info_PB16()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 5
+            MDLabel:
+                text: " "
+            MDGridLayout:
+                cols: 2
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusok
+                        group: 'status_porta'
+                    MDLabel:
+                        text: "OK"
+
+                ListaBipagem:
+                    MDCheckbox:
+                        id: statusbko
+                        group: 'status_porta'
+
+                    MDLabel:
+                        text: "BKO"
+            MDTextField:
+                id: SNP16
+                hint_text: " FSAN/SN: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: PPP16
+                hint_text: " PPPOE: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Pwd16
+                hint_text: " PWD: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Loid16
+                hint_text: " LOID: (OPCIONAL) "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+            MDTextField:
+                id: Obs16
+                hint_text: " OBSERVAÇÃO: "
+                mode: "rectangle"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint_x: 0.8
+
+            MDLabel:
+                text: " "

@@ -1,0 +1,32 @@
+<CameraScreen>:
+    name: 'camera2'
+
+    FloatLayout:
+        MDTopAppBar:
+            title: "Câmera"
+            elevation: 2.5
+            anchor_title: 'left'
+            left_action_items: [["arrow-left-bold", lambda x: root.manager.current('Ticket_Status')]]
+            md_bg_color: 0.90, 0.05, 0.06, 1
+            pos_hint: {'top' : 1 }
+
+    FloatLayout:
+        orientation: "vertical"
+
+        Camera:
+            id: camera
+            play: False
+            resolution: (640, 480)
+            #pos_hint: {"center_y": 0.690}
+
+        MDFloatingActionButton:
+            icon: "camera"
+            pos_hint: {"center_x": 0.4, "center_y": 0.4858}
+            md_bg_color: 0.90, 0.05, 0.06, 1
+            on_press: root.capture()
+
+        MDFloatingActionButton:
+            icon: "pause"
+            pos_hint: {"center_x": 0.6, "center_y": 0.4858}
+            md_bg_color: 0.90, 0.05, 0.06, 1
+            on_press: camera.play = not camera.play
